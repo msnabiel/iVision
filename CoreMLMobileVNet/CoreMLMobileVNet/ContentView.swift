@@ -67,32 +67,43 @@ struct ContentView: View {
                 }
                 
                 VStack {
-                    Text("Classification Result: \(classificationResult)")
-                        .padding()
-                        .background(Color.yellow.opacity(0.2))
-                        .cornerRadius(10)
-                        .padding(.bottom, 10)
-                    
-                    if showGeminiButton {
-                        Button(action: {
-                            sendMessage(text: "What is a \(classificationResult)?")
-                        }) {
-                            Text("Ask Gemini")
-                                .padding()
-                                .background(Color.blue.opacity(0.2))
-                                .cornerRadius(10)
-                                .foregroundColor(.black)
+                    HStack{
+                        Text("Classification Result: \(classificationResult)")
+                            .padding()
+                            .background(Color.yellow.opacity(0.2))
+                            .cornerRadius(10)
+                            .padding(.bottom, 10)
+                        
+                        if showGeminiButton {
+                            Button(action: {
+                                sendMessage(text: "What is a \(classificationResult)?")
+                            }) {
+                                Image("GeminiIcon") // Replace "GeminiIcon" with the actual name of your icon asset
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 24, height: 24) // Adjust size as needed
+                                    .padding()
+                                    .background(Color.white.opacity(0.2))
+                                    .cornerRadius(10)
+                                    .overlay(
+                                                            Circle().stroke(Color.black, lineWidth: 2) // Circle border
+                                                        )
+                                    .foregroundColor(.black)
+                            }
+                            .padding(.bottom, 10)
                         }
-                        .padding(.bottom, 10)
                     }
                     
                     HStack {
                         Button(action: {
                             imagePickerPresented = true
                         }) {
-                            Text("Upload Image/Video")
+                            Image(systemName: "photo.on.rectangle")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 18, height: 21)
                                 .padding()
-                                .background(Color.green.opacity(0.2))
+                                .background(Color.white.opacity(0.2))
                                 .cornerRadius(10)
                                 .foregroundColor(.black)
                         }
@@ -106,9 +117,12 @@ struct ContentView: View {
                         Button(action: {
                             cameraPresented = true
                         }) {
-                            Text("Use Camera")
+                            Image(systemName: "camera")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 18, height: 21)
                                 .padding()
-                                .background(Color.green.opacity(0.2))
+                                .background(Color.white.opacity(0.2))
                                 .cornerRadius(10)
                                 .foregroundColor(.black)
                         }
@@ -119,9 +133,9 @@ struct ContentView: View {
                                 cameraPresented = false
                             }
                         }
-                    }
-                    
-                    HStack {
+                        
+                        Spacer()
+                        
                         ZStack(alignment: .leading) {
                             if messageText.isEmpty {
                                 Text("Ask Gemini...")
@@ -159,7 +173,7 @@ struct ContentView: View {
                 .padding(.bottom, 10)
             }
             .background(Color.white.edgesIgnoringSafeArea(.all))
-            .navigationBarTitle("Image Classification", displayMode: .inline)
+            .navigationBarTitle("iVision", displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 imagePickerPresented = true
             }) {
@@ -218,7 +232,7 @@ struct ContentView: View {
     func generateResponse(query: String) async -> String {
         do {
             let response = try await model.generateContent(query)
-            return response.text ?? "No response text available."
+            return formatResponse(response.text ?? "No response text available.")
         } catch {
             return "Failed to get response: \(error.localizedDescription)"
         }
@@ -232,10 +246,17 @@ struct ContentView: View {
             let base64String = imageData.base64EncodedString()
             let fullPrompt = "\(prompt)\n\nImage: \(base64String)"
             let response = try await model.generateContent(fullPrompt)
-            return response.text ?? "No response text available."
+            return formatResponse(response.text ?? "No response text available.")
         } catch {
             return "Failed to get response: \(error.localizedDescription)"
         }
+    }
+
+    func formatResponse(_ text: String) -> String {
+        var formattedText = text
+        formattedText = formattedText.replacingOccurrences(of: "**", with: "")
+        formattedText = formattedText.replacingOccurrences(of: "**", with: "")
+        return formattedText
     }
 }
 
@@ -304,20 +325,20 @@ struct CameraView: UIViewControllerRepresentable {
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         let parent: CameraView
 
-            init(_ parent: CameraView) {
-                self.parent = parent
-            }
+        init(_ parent: CameraView) {
+            self.parent = parent
+        }
 
-            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-                if let image = info[.originalImage] as? UIImage {
-                    parent.completion(image)
-                }
-                picker.dismiss(animated: true)
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                parent.completion(image)
             }
+            picker.dismiss(animated: true)
+        }
 
-            func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-                picker.dismiss(animated: true)
-            }
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            picker.dismiss(animated: true)
         }
     }
+}
 
