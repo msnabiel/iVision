@@ -1,4 +1,3 @@
-
 # iVision: Apple Vision Assistant
 
 iVision is an iOS application built using SwiftUI and CoreML/Vision frameworks that allows users to classify images using MobileNetV2 and interact with Google Generative AI (Gemini) for generating responses based on user queries.
@@ -12,7 +11,7 @@ iVision is an iOS application built using SwiftUI and CoreML/Vision frameworks t
 
 ## Screenshots
 
-_will update_
+_I will update it soon_
 
 ## Installation
 
@@ -36,7 +35,13 @@ _will update_
    open iVision.xcodeproj
    ```
 
-3. Build and run the project using the iOS Simulator or your physical device.
+3. Replace `YOUR_API_KEY` in the code with your Google Generative AI (Gemini) API key. Obtain your API key from the Google Cloud Console if you haven't already.
+
+4. Build and run the project using the iOS Simulator or your physical device.
+
+### Configuration
+
+- **Gemini API Key**: Replace `YOUR_API_KEY` in the code with your actual Gemini API key. This is necessary for the app to communicate with Google Generative AI.
 
 ## Usage
 
@@ -44,6 +49,11 @@ _will update_
 2. Use the "Upload Image/Video" button to select an image or "Use Camera" to capture a new image for classification.
 3. After classification, interact with the "Ask Gemini" button to query Google's Generative AI for additional insights or responses.
 4. Enter text queries in the iMessage-like input box to engage with the app further.
+
+## Authors
+
+- Syed Nabiel Hasaan M
+  - Email: msyednabiel@gmail.com
 
 ## Known Issues
 
