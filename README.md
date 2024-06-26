@@ -1,7 +1,3 @@
-Certainly! Here's a README file template for your SwiftUI application "iVision":
-
----
-
 # iVision: Apple Vision Assistant
 
 iVision is an iOS app that integrates image classification using CoreML and Google Generative AI (Gemini) for generating responses based on user queries and images.
