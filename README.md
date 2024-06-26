@@ -1,68 +1,44 @@
+Certainly! Here's a README file template for your SwiftUI application "iVision":
+
+---
+
 # iVision: Apple Vision Assistant
 
-iVision is an iOS application built using SwiftUI and CoreML/Vision frameworks that allows users to classify images using MobileNetV2 and interact with Google Generative AI (Gemini) for generating responses based on user queries.
+iVision is an iOS app that integrates image classification using CoreML and Google Generative AI (Gemini) for generating responses based on user queries and images.
 
 ## Features
 
-- **Image Classification**: Uses MobileNetV2 model to classify images uploaded from the photo library or captured via the device camera.
-- **Google Generative AI Integration**: Utilizes Gemini to generate responses based on user queries or classified images.
-- **User Interface**: Clean and minimalistic UI inspired by Apple's design principles.
-- **Interactive Messaging**: Users can interact with the app by typing queries or clicking buttons to invoke specific actions like uploading images or querying Gemini.
+- **Image Classification**: Uses CoreML with MobileNetV2 for image classification.
+- **Text-based Interaction**: Communicate with Gemini to get responses based on user queries.
+- **Camera and Photo Library Integration**: Allows users to capture or select images for classification and interaction.
+- **Integration with Google Generative AI**: Engages Gemini for generating responses based on user queries and uploaded images.
 
 ## Screenshots
 
-_I will update it soon_
+![Screenshot 1](screenshots/screenshot1.png)
 
-## Installation
+## How to Use
 
-### Requirements
+1. **API Key Setup**: Replace `"YOUR_API_KEY"` in `ContentView.swift` with your Google Generative AI API key. Ensure you have permissions and keep your API key secure.
 
-- Xcode 12.0 or later
-- iOS 14.0 or later
+2. **Run the App**: Open the project in Xcode and run the app on an iOS simulator or device.
 
-### Installation Steps
+3. **Interact with iVision**:
+   - **Image Classification**: Tap on the photo library or camera icons to upload an image for classification.
+   - **Text Queries**: Type your query in the text field and tap the send button to interact with Gemini.
 
-1. Clone the repository:
+4. **View Responses**: Classification results and Gemini responses will appear in the chat interface.
 
-   ```bash
-   git clone https://github.com/your-username/iVision.git
-   ```
+## Author
 
-2. Open the project in Xcode:
+- **Author**: Syed Nabiel Hasaan M.
+- **Email**: msyednabiel@gmail.com
 
-   ```bash
-   cd iVision
-   open iVision.xcodeproj
-   ```
+## Notes
 
-3. Replace `YOUR_API_KEY` in the code with your Google Generative AI (Gemini) API key. Obtain your API key from the Google Cloud Console if you haven't already.
-
-4. Build and run the project using the iOS Simulator or your physical device.
-
-### Configuration
-
-- **Gemini API Key**: Replace `YOUR_API_KEY` in the code with your actual Gemini API key. This is necessary for the app to communicate with Google Generative AI.
-
-## Usage
-
-1. Launch the app on your iOS device.
-2. Use the "Upload Image/Video" button to select an image or "Use Camera" to capture a new image for classification.
-3. After classification, interact with the "Ask Gemini" button to query Google's Generative AI for additional insights or responses.
-4. Enter text queries in the iMessage-like input box to engage with the app further.
-
-## Authors
-
-- Syed Nabiel Hasaan M
-  - Email: msyednabiel@gmail.com
-
-## Known Issues
-
-- Currently, there are no known issues. Please report any bugs or feature requests by opening an issue in the repository.
-
-## Contributing
-
-Contributions are welcome! Feel free to fork the repository and submit pull requests to propose changes.
+- This app demonstrates integration of CoreML for image classification and Google Generative AI for text generation.
+- Ensure proper handling of user data and permissions in compliance with Apple's guidelines.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
