@@ -15,7 +15,7 @@ iVision is an iOS app that integrates image classification using CoreML and Goog
 
 ## Screenshots
 
-<img src="screenshot1.png" alt="Screenshot 1" height="400">
+<img src="screenshot1.png" alt="Screenshot 1" height="500">
 
 ## How to Use
 
